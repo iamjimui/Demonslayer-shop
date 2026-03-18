@@ -1,4 +1,4 @@
-# Groupe de huynh_j 1004268
+# Demon Slayer Shop
 
 $ npm install @fortawesome/fontawesome-svg-core
 $ npm install @fortawesome/free-solid-svg-icons
