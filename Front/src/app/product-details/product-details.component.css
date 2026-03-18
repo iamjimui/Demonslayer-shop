@@ -1,0 +1,35 @@
+@font-face {
+  font-family: BobaMilky;
+  src: url(/assets/fonts/BobaMilky/BobaMilky.ttf);
+}
+
+.ratingStar {
+  color: orange;
+}
+
+span, li, p, h1, h2, h3, h4, h5, button, label, input {
+  font-family: BobaMilky;
+}
+
+#title-home {
+  position:relative;
+  display:flex;
+  justify-content:center;
+  padding-top:3%;
+  margin-bottom:3%;
+}
+
+#title-home > h1 {
+  background-image: url(../../assets/images/backgrounds/tanjirobanner.jpg);
+  width:50vw;
+  height:10vh;
+  background-size:cover;
+  color:white;
+  border-radius:30px;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  text-shadow: 0 0 2px #000;
+  box-shadow: 5px 5px 5px black;
+}
+

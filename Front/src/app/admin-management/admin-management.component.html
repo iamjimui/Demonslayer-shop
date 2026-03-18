@@ -1,0 +1,201 @@
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Role</th>
+        <th scope="col">Email</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor = "let user of apiService.users; let rowIndex = index">
+        <tr>
+          <th scope="row"><img src="{{user.image}}" height="30" width="30" style="border-radius:50%;"></th>
+            <td>{{user.username}}</td>
+            <td>{{user.role}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.adresse}}</td>
+            <td>
+              <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#createUserModal'+rowIndex">
+                Edit User
+              </button>
+              <div class="modal fade" [attr.id]="'createUserModal'+rowIndex" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <form (ngSubmit)="updateUserForm($event)" action="">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="createUserModal">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <input type="hidden" name="_id" value="{{user._id}}">
+                          <label>Username :</label>
+                          <input type="text" name="username" value="{{user.username}}">
+                          <br>
+                          <br>
+                          <label>Role :</label>
+                          <input type="number" name="role" value="{{user.role}}">
+                          <br>
+                          <label>Email :</label>
+                          <input type="email" name="email" value="{{user.email}}">
+                          <br>
+                          <label>Adresse :</label>
+                          <input type="text" name="adresse" value="{{user.adresse}}">
+                          <br>
+                          <label>Currencies :</label>
+                          <input type="number" name="currencies" value="{{user.currencies}}">
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-danger" (click)="deleteUser(user.username)">Delete User</button>
+              <button class="btn btn-primary" (click)="checkProducts(user.username)">Check products</button>
+              <button class="btn btn-primary" (click)="checkOrders(user.username)">Check orders</button>
+            </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  
+  <button class="btn btn-warning" (click)="this.apiService.cleanPage()">Reset</button>
+  
+  <div class="parent-card">
+    <div class="for-card" *ngFor = "let myProduct of apiService.myProducts; let rowIndex = index">
+      <div class="card child-card">
+        <img src="{{myProduct.image}}" style="width:100%;" class="card-img-top"/>
+        <div class="card-body">
+          <h5 class="card-title">{{myProduct.name}}</h5>
+          <p class="card-text">Price : {{myProduct.price}} €
+            <br>
+            <ng-container *ngIf="myProduct.rating !== 'null' && myProduct.rating; then thenBlock else elseBlock"></ng-container>
+            <ng-template #thenBlock>Rating : {{myProduct.rating}} <i class="fa-star fa-solid" style="color:orange;"></i></ng-template>
+            <ng-template #elseBlock>Rating : Nothing</ng-template>
+          </p>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#createProductModal'+rowIndex">
+        Edit Product
+      </button>
+      <form>
+        <button type="button" class="btn btn-danger" (click)="deleteProduct(myProduct._id)">
+          Delete Product
+        </button>
+      </form>
+      
+      <div class="modal fade" [attr.id]="'createProductModal'+rowIndex" tabindex="-1" role="dialog" aria-labelledby="createProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form (ngSubmit)="updateProductForm($event)" action="">
+              <div class="modal-header">
+                <h5 class="modal-title" id="createProductModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <input type="hidden" name="_id" value="{{myProduct._id}}">
+                  <label>Name :</label>
+                  <input type="text" name="name" value="{{myProduct.name}}">
+                  <br>
+                  <label for="type-select">Choose a type:</label>
+                  <select name="productTypeId">
+                    <option value="">--Please choose an option--</option>
+                    <ng-container *ngFor = "let productType of apiService.allProductTypes;">
+                      <div *ngIf="myProduct.productTypeId._id === productType._id; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock><option value="{{productType._id}}" selected>{{productType.name}}</option></ng-template>
+                        <ng-template #elseBlock><option value="{{productType._id}}">{{productType.name}}</option></ng-template>
+                    </ng-container>
+                  </select>
+                  <br>
+                  <label>Description :</label>
+                  <input type="text" name="description" value="{{myProduct.description}}">
+                  <br>
+                  <label>Price :</label>
+                  <input type="text" name="price" value="{{myProduct.price}}">
+                  <br>
+                  <label>Image :</label>
+                  <input type="text" name="productImage" value="{{myProduct.image}}">
+                  <br>
+                  <div *ngFor = "let productWithSize of myProduct.productWithSizes;">
+                    <p>{{productWithSize.productSizeId.name}}</p>
+                  </div>
+                  <ng-container *ngFor = "let productSize of apiService.allProductSizes;">
+                    <input type="checkbox" name="productSizes" value="{{productSize._id}}">
+                    <label>{{productSize.name}}</label>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-container *ngFor = "let order of apiService.orders; let i = index;">
+    <div class="row">
+      <div class="col" style="display: flex;justify-content: center;align-items: center;flex-direction:column;">
+        <span>Order n°{{order._id}}</span>
+        <span>Total price : {{order.total_price}} €</span>
+        <span>Date : {{order.created_at}}</span>
+      </div>
+      <div class="col">
+        <a
+          data-mdb-toggle="collapse"
+          href="#order{{order._id}}"
+          role="button"
+          [attr.aria-expanded]="false"
+          [attr.aria-controls]="order._id"
+          (click)="changeArrowIcon(i)"
+          style="display:flex;justify-content:center;align-items:center;"
+        >
+        <i class="fa-solid fa-angles-down" style="font-size:1.5em;border:1px solid;border-radius:50%;padding:1em;"></i>
+        </a>
+        <ng-container *ngFor = "let orderDetail of order.orderDetails">
+          <ng-container *ngIf="orderDetail.product; then thenBlock"></ng-container>
+          <ng-template #thenBlock>
+            
+            <div class="collapse mt-3" id="order{{order._id}}">
+              <div class="row">
+                <div class="col" style="display:flex;justify-content:center;align-items:center;">
+                  <img src="{{orderDetail.product.image}}"
+                  class="rounded-circle"
+                  width="100"
+                  height="100"
+                  loading="lazy"
+                  style="object-fit: cover;">
+                </div>
+                <div class="col">
+                  <p>Name : {{orderDetail.product.name}}</p>
+                  <p>Quantity : {{orderDetail.quantity}}</p>
+                  <p>Size : {{orderDetail.productSize.name}}</p>
+                  <p>Price : {{orderDetail.price}} €</p>
+                </div>
+              </div>
+              <hr>
+            </div>
+            
+          </ng-template>
+          
+        </ng-container>
+      </div>
+    </div>
+    <hr>
+  </ng-container>
+</div>

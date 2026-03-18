@@ -1,0 +1,8 @@
+@font-face {
+  font-family: BobaMilky;
+  src: url(/assets/fonts/BobaMilky/BobaMilky.ttf);
+}
+
+span, li, p, h1, h2, h3, h4, h5, button, label, input {
+  font-family: BobaMilky;
+}

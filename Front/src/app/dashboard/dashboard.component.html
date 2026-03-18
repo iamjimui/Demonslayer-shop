@@ -1,0 +1,118 @@
+<!-- Tabs navs -->
+<ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link active"
+      id="ex2-tab-1"
+      data-mdb-toggle="tab"
+      href="#ex2-tabs-1"
+      role="tab"
+      aria-controls="ex2-tabs-1"
+      aria-selected="true"
+      >Dashboard</a
+    >
+  </li>
+  <li class="nav-item" role="presentation" (click)="changePageToProductManagement()">
+    <a
+      class="nav-link"
+      id="ex2-tab-2"
+      data-mdb-toggle="tab"
+      href="#ex2-tabs-2"
+      role="tab"
+      aria-controls="ex2-tabs-2"
+      aria-selected="false"
+      >Manage products</a
+    >
+  </li>
+  <li class="nav-item" role="presentation" (click)="changePageToOrders()">
+    <a
+      class="nav-link"
+      id="ex2-tab-3"
+      data-mdb-toggle="tab"
+      href="#ex2-tabs-3"
+      role="tab"
+      aria-controls="ex2-tabs-3"
+      aria-selected="false"
+      >Orders</a
+    >
+  </li>
+</ul>
+<!-- Tabs navs -->
+
+<!-- Tabs content -->
+<div class="tab-content" id="ex2-content">
+  <div
+    class="tab-pane fade show active"
+    id="ex2-tabs-1"
+    role="tabpanel"
+    aria-labelledby="ex2-tab-1"
+  >
+    <section id="section-dashboard">
+      <div style="width:100%;height:100vh;display:flex;justify-content:center;align-items:center;">
+        <div class="row" style="position:relative;width: 90vw;">
+          <div id="blur-bg">
+          </div>
+          <div class="col" style="display:flex;justify-content: center;align-items: center;flex-direction: column;padding-top: 5%;
+          padding-bottom: 5%;">
+            <h2 style="color:white;text-shadow: 0 0 2px #000;">Update your informations</h2>
+            <form (ngSubmit)="updateCredentials($event)">
+              <input type="hidden" name="role" value="{{apiService.me.role}}">
+              <input type="hidden" name="currencies" value="{{apiService.me.currencies}}">
+              <div class="form-outline mb-4">
+                <input type="text" value="{{apiService.me.username}}" name="username" id=" form1Example1" class="form-control active" style="background-color:white;"/>
+                <label class="form-label" for="form1Example1">Username</label>
+              </div>
+              <br>
+              <div class="form-outline mb-4">
+                <input type="email" value="{{apiService.me.email}}" name="email" id=" form1Example1" class="form-control active" style="background-color:white;"/>
+                <label class="form-label" for="form1Example1">Email address</label>
+              </div>
+              <br>
+              <div class="form-outline mb-4">
+                <input type="text" value="{{apiService.me.adresse}}" name="adresse" id=" form1Example1" class="form-control active" style="background-color:white;"/>
+                <label class="form-label" for="form1Example1">Adresse</label>
+              </div>
+              <br>
+              <div class="form-outline mb-4">
+                <input type="password" name="new_password" id=" form1Example1" class="form-control" style="background-color:white;"/>
+                <label class="form-label" for="form1Example1">New Password</label>
+              </div>
+              <br>
+              <div class="form-outline mb-4">
+                <input type="password" name="old_password" id=" form1Example1" class="form-control" style="background-color:white;"/>
+                <label class="form-label" for="form1Example1">Old Password (Confirm)</label>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+          </div>
+          <div class="col" style="display:flex;justify-content: center;align-items: center;flex-direction: column;">
+            <h2 style="color:white;text-shadow: 0 0 2px #000;">Update your profile picture</h2>
+            <form (ngSubmit)="uploadImage()">
+              <label for="file">Profile picture :</label>
+              <input class="form-control" #fileInput type="file" (change)="onChange($event)">
+              <br>
+              <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+  </div>
+  <div
+    class="tab-pane fade"
+    id="ex2-tabs-2"
+    role="tabpanel"
+    aria-labelledby="ex2-tab-2"
+  >
+  </div>
+  <div
+    class="tab-pane fade"
+    id="ex2-tabs-3"
+    role="tabpanel"
+    aria-labelledby="ex2-tab-3"
+  >
+  </div>
+</div>
+<!-- Tabs content -->

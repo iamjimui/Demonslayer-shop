@@ -1,0 +1,28 @@
+@font-face {
+  font-family: BobaMilky;
+  src: url(/assets/fonts/BobaMilky/BobaMilky.ttf);
+}
+
+span, li, p, h1, h2, h3, h4, h5, button, label, input {
+  font-family: BobaMilky;
+}
+
+#section-dashboard {
+  background-image: url(../../assets/images/backgrounds/nezukobackground.jpg);
+  background-size:cover;
+}
+
+#blur-bg {
+  z-index:10;
+  position:absolute;
+  height:100%;
+  width:100%;
+  z-index:10!important;
+  background: rgba(0,0,0,0.1);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-radius:10px;
+}
+
+.row > .col {
+  z-index:11;
+}

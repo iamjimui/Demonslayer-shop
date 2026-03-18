@@ -1,0 +1,10 @@
+<ng-container *ngIf="pageName !== 'intro' && pageName !== ''; then thenBlock else elseBlock"></ng-container>
+<ng-template #thenBlock>
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</ng-template>
+<ng-template #elseBlock>
+  <router-outlet></router-outlet>
+</ng-template>
+<script src="{{URL_FRONT}}/assets/scripts/loadingLogo.js"></script>

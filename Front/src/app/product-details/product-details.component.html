@@ -1,0 +1,97 @@
+<div *ngFor = "let singleProduct of apiService.singleProduct">
+    <div id="title-home">
+        <h1>Product Details</h1>
+    </div>
+    <form (ngSubmit)="submitForm($event)" action="">
+        <div style="margin-left:5%;margin-right:5%;">
+            <div class="row">
+                <div class="col">
+                    <img src="{{singleProduct.image}}" style="border-radius:50px;height:100%;width:100%;box-shadow: 3px 3px 10px black;">
+                    <div class="form-group">
+                        <input type="hidden" name="quantity" value="1">
+                        <input type="hidden" name="_id" value="{{singleProduct._id}}">
+                        <input type="hidden" name="userId" value="{{singleProduct.userId}}">
+                        <input type="hidden" name="productTypeId" value="{{singleProduct.productTypeId}}">
+                        <input type="hidden" name="name" value="{{singleProduct.name}}">
+                        <input type="hidden" name="description" value="{{singleProduct.description}}">
+                        <input type="hidden" name="price" value="{{singleProduct.price}}">
+                        <input type="hidden" name="productPrice" value="{{singleProduct.price}}">
+                        <input type="hidden" name="image" value="{{singleProduct.image}}">
+                    </div>
+                    
+                </div>
+                <div class="col" style="display: flex;
+                flex-direction: column;
+                justify-content: center;">
+                    <p>Name : {{singleProduct.name}}</p>
+                    <p>Description : {{singleProduct.description}}</p>
+                    <div><i class="fa-star fa-solid" style="color:orange;"></i><span>{{singleProduct.rating}}/5</span></div>
+                    
+                    <br>
+                    <span>Sizes :</span>
+                    <br>
+                    <div style="display:flex;">
+                        <div *ngFor = "let productSize of singleProduct.productSizes" style="margin-top:1%;margin-right:1%;">
+                            <label for="{{productSize.productSizeId.name}}">{{productSize.productSizeId.name}}</label>
+                            <input type="radio" name="productSize" value="{{productSize.productSizeId | json}}">
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Add to cart</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </form>
+    <hr>
+    <div style="margin-left:5%;margin-right:5%;">
+        <h2>Comments</h2>
+        <form (ngSubmit)="submitComment($event)" action="">
+            <i (click)="defineRating(1)" class="ratingStar fa-star fa-regular"></i>
+            <i (click)="defineRating(2)" class="ratingStar fa-star fa-regular"></i>
+            <i (click)="defineRating(3)" class="ratingStar fa-star fa-regular"></i>
+            <i (click)="defineRating(4)" class="ratingStar fa-star fa-regular"></i>
+            <i (click)="defineRating(5)" class="ratingStar fa-star fa-regular"></i>
+            <div class="form-outline">
+                <textarea class="form-control" name="comment"  id="textAreaExample" rows="4"></textarea>
+                <label class="form-label" for="textAreaExample">Message</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+    </div>
+</div>
+<div style="margin-left:5%;margin-right:5%;">
+    <div *ngFor = "let comment of apiService.commentsOfProduct">
+        <ng-container *ngIf="cookieService.getToken(); then thenBlock"></ng-container>
+        <ng-template #thenBlock>
+            <ng-container *ngIf="cookieService.credentials._id === comment.userId; then thenBlock"></ng-container>
+            <ng-template #thenBlock>
+                <h3>Your last comment : </h3>
+                <form (ngSubmit)="updateOrDeleteComment($event, comment._id)" action="">
+                    <div class="form-group">
+                        <textarea class="form-control" name="comment"  id="textAreaExample" rows="4" value="{{comment.comment}}"></textarea>
+                        <label class="form-label" for="textAreaExample">Message</label>
+                    </div>
+                    <button type="submit" (click)="updateComment()">Edit</button>
+                    <button type="submit" (click)="deleteComment()">Delete</button>
+                </form>
+            </ng-template>
+        </ng-template>
+    </div>
+</div>
+<br>
+<div style="margin-left:5%;margin-right:5%;">
+    <div *ngFor = "let comment of apiService.commentsOfProduct">
+        <ng-container *ngFor="let item of [].constructor(5); let i = index">
+            <ng-container *ngIf="i > comment.rating - 1; then thenBlock else elseBlock"></ng-container>
+                <ng-template #thenBlock><i class="fa-star fa-regular" style="color:orange;"></i></ng-template>
+                <ng-template #elseBlock><i class="fa-star fa-solid" style="color:orange;"></i></ng-template>
+        </ng-container>
+        <br>
+        <span>{{comment.userId}} commented : {{comment.comment}}</span>
+        <br>
+        <span>Date : {{comment.created_at}}</span>
+        <br>
+    </div>
+</div>

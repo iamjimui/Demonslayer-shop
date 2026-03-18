@@ -1,0 +1,26 @@
+version: '3.8'
+name: umaishop
+services:
+  api:
+    container_name: umaishopapi
+    build: ../../API/
+    command: bash -c "npm install && nodemon -L server.js"
+    ports:
+      - "3000:3000"
+    environment:
+      - URL_MONGO=mongodb://root:password@mongo
+      - URL_API=http://13.39.172.124:3000
+      - SECRET_KEY=667877b49c1712be993161c057be1deea8444de1aba2ef13da9e27d2487574d2ad59c82d5fbf8a39df46ea939698fba42c84f22814819c3ff2091ab4e424e770
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: umaishopmongo
+    image: mongo:latest
+    volumes:
+      - ../umaishopdb:/data/db
+    ports: 
+      - "27017:27017"
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password

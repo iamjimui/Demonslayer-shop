@@ -1,0 +1,39 @@
+
+
+<section id="section-signup">
+
+  <div id="signup-form-div">
+    <form id="signup-form" [formGroup]="form" (ngSubmit)="submitForm()">
+      
+      <div id="black-opacity"></div>
+      <div style="position:relative;
+      padding-top:5%;
+      padding-bottom:5%;
+      z-index:11;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;">
+        <img src="../../assets/images/logos/UmaiShop_Logo.png" style="width:50%;margin-bottom:5%;">
+        <div class="form-group input-group-lg">
+          <input class="form-control" type="hidden" formControlName="role">
+          <label for="username">Username :</label>
+          <input class="form-control" type="text" placeholder="Your username" formControlName="username">
+          <label for="username">Password :</label>
+          <input class="form-control" type="password" placeholder="Your password" formControlName="password">
+          <label for="email">Email :</label>
+          <input class="form-control" type="email" placeholder="Your email" formControlName="email">
+          <label for="adresse">Address :</label>
+          <input class="form-control" type="text" placeholder="Your address" formControlName="adresse">
+        </div>
+      
+        <div class="form-group">
+          <button class="btn btn-primary btn-block btn-lg">signup</button>
+        </div>
+      </div>
+      
+    </form>
+  </div>
+</section>
+
+

@@ -1,0 +1,61 @@
+@font-face {
+  font-family: DemonSlayerFont;
+  src: url(/assets/fonts/DemonSlayer/blood-crow-Condensed.ttf);
+}
+
+* {
+  font-family: DemonSlayerFont;
+}
+
+#introSection1 {
+  background-image:url(/assets/images/backgrounds/introDemonSlayerBackground1.jpg);
+  height:100vh;
+  width:100%;
+}
+
+#introSection2 {
+  background-image:url(/assets/images/backgrounds/japaneseScrollInsideBackground.jpg);
+  height:100%;
+  background-size: cover;
+  text-align: center;
+}
+
+#introSection2 > span {
+  font-size:9rem;
+}
+
+#introSection2 > p {
+  font-size:4.2rem;
+}
+
+#introDemonSlayerLogo {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 30%;
+}
+
+#introSection1 > #introDemonSlayerLogo > img{
+  transition-duration: 0.5s;
+  height:100%;
+  width:100%;
+}
+
+#introSection1:hover > #introDemonSlayerLogo:hover >img {
+  transform: scale(1.2);
+  transition-duration: 1s;
+}
+
+.introDemonSlayerSeparator {
+  background-color:yellow;
+  height:1.2em;
+  padding:0;
+  margin:0;
+}
+
+#introDemonSlayerOpeningVideo {
+  width:100%;
+  height:100%;
+}

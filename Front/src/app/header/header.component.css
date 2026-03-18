@@ -1,0 +1,98 @@
+@font-face {
+  font-family: DemonSlayerFont;
+  src: url(/assets/fonts/DemonSlayer/blood-crow-Condensed.ttf);
+}
+
+li {
+  font-family: DemonSlayerFont;
+  font-size:2vw;
+}
+
+.nav-item > a {
+  color:white;
+  font-size:2vw;
+}
+
+.nav-item > a:hover {
+  color:gray;
+}
+
+li > a {
+  color:white;
+  background-color:#863841;
+}
+
+li > a:hover {
+  color:gray;
+}
+
+i {
+  color:white;
+}
+
+@media screen and (max-width: 990px) {
+  .nav-item > a {
+    font-size:5vw;
+  }
+}
+
+.loader-wrapper {
+  width: 100vw;
+  height: 300vh;
+  position: absolute;
+  background-size:cover;
+  top: 0;
+  left: 0;
+  background-color: #d1c58e;
+  z-index:200;
+}
+
+.loading-img {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:200;
+}
+
+.loader {
+  border-radius: 70%;
+  width:350px;
+  height:250px;
+  animation: rotation 0.7s infinite linear;
+}
+
+#aroundGear {
+  z-index:101;
+  border-radius: 50%;
+  height:5rem;
+  width:5rem;
+  background-color: #d1c58e;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  box-shadow: inset 10px 5px 5px red;
+  cursor:pointer;
+}
+
+#aroundGear {
+  font-size:2rem;
+}
+
+#aroundGear:hover {
+  box-shadow: inset 10px 5px 5px blue;
+}
+
+#aroundGear > i:hover{
+  animation: rotation 0.7s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(380deg);
+  }
+}

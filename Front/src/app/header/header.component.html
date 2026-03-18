@@ -1,0 +1,152 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position:sticky;z-index:200;">
+  <!-- Container wrapper -->
+  <div class="container-fluid" style="background-color:#863841;">
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="#">
+        <img
+          src="../../assets/images/logos/UmaiShop_Logo.png"
+          height="40"
+          alt="MDB Logo"
+          loading="lazy"
+        />
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Icon -->
+      <a class="text-reset me-3" href="/cart">
+        <i class="fas fa-shopping-cart" style="font-size:1.5em;"></i>
+        <span class="badge rounded-pill badge-notification bg-danger">{{cartService.nb}}</span>
+      </a>
+      
+      <!-- Notifications -->
+     <!--  <div class="dropdown">
+        <a
+          class="text-reset me-3 dropdown-toggle hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fas fa-bell"></i>
+          <span class="badge rounded-pill badge-notification bg-danger">1</span>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuLink"
+        >
+          <li>
+            <a class="dropdown-item" href="#">Some news</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Another news</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </li>
+        </ul>
+      </div> -->
+      <!-- Avatar -->
+      <div class="dropdown">
+        <a
+          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+            <ng-container *ngIf="apiService.me.length !== 0; then thereIsMe else thereIsNotMe"></ng-container>
+            <ng-template #thereIsMe>
+              <ng-container *ngIf="apiService.me.image !== null && apiService.me.image !== ''; then thenBlock else elseBlock"></ng-container>
+                <ng-template #thenBlock>
+                  <img src="{{apiService.me.image}}" 
+                  class="rounded-circle"
+                  width="40"
+                  height="40"
+                  loading="lazy">
+                </ng-template>
+                <ng-template #elseBlock>
+                  <img src="/assets/images/logos/defaultpfp.jpg"
+                  class="rounded-circle"
+                  width="25"
+                  height="25"
+                  loading="lazy">
+                </ng-template>
+            </ng-template>
+            <ng-template #thereIsNotMe>
+              <img src="/assets/images/logos/defaultpfp.jpg" 
+              class="rounded-circle"
+              width="25"
+              height="25"
+              loading="lazy">
+            </ng-template>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar"
+          style="background-color: #863841;"
+        >
+          <ng-container *ngIf="apiService.me.length !== 0; then thenBlock else elseBlock"></ng-container>
+          <ng-template #thenBlock>
+            <li>
+              <a class="dropdown-item" href="/dashboard">My profile</a>
+            </li>
+            <ng-container *ngIf="apiService.me.role === 2; then thereIsMe"></ng-container>
+            <ng-template #thereIsMe>
+              <li>
+                <a class="dropdown-item" style="cursor:pointer;" href="/dashboard/admin-management">Admin Dashboard</a>
+              </li>
+            </ng-template>
+            <li>
+              <a class="dropdown-item" style="cursor:pointer;" (click)="logout()">Logout</a>
+            </li>
+          </ng-template>
+          <ng-template #elseBlock>
+            <li>
+              <a class="dropdown-item" href="/login">Login</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/signup">Sign Up</a>
+            </li>
+          </ng-template>
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<div class="loader-wrapper">
+</div>
+<div class="loading-img">
+  <img class="loader" src="{{URL_FRONT}}/assets/images/logos/UmaiShop_Logo.png"/>
+</div>

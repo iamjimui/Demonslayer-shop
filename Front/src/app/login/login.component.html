@@ -1,0 +1,30 @@
+<section id="section-login">
+
+  <div id="login-form-div">
+    <form id="login-form" [formGroup]="form" (ngSubmit)="submitForm()">
+      
+      <div id="black-opacity"></div>
+      <div style="position:relative;
+      z-index:11;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top:10%;">
+        <img src="../../assets/images/logos/UmaiShop_Logo.png" style="width:50%;margin-bottom:5%;">
+        <div class="form-group input-group-lg">
+          <label for="username">Username :</label>
+          <input class="form-control" type="text" placeholder="Your username" formControlName="username">
+          <label for="username">Password :</label>
+          <input class="form-control" type="password" placeholder="Your password" formControlName="password">
+        </div>
+      
+        <div class="form-group">
+          <button class="btn btn-primary btn-block btn-lg">Login</button>
+        </div>
+      </div>
+      
+    </form>
+  </div>
+</section>
+

@@ -1,0 +1,7 @@
+node_modules
+database.txt
+.angular
+umaishopdb
+API/public/products_images
+API/public/users_images
+*.env

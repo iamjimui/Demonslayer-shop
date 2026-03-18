@@ -1,0 +1,23 @@
+<section id="section-home">
+  <div id="black-opacity"></div>
+  <div id="title-home">
+     <h1>Products</h1>
+  </div>
+  <div class="parent-card">
+    <div class="for-card" *ngFor = "let product of apiService.products">
+      <div class="card child-card">
+        <img src="{{product.image}}" style="width:100%;" class="card-img-top"/>
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text">Price : {{product.price}} €
+            <br>
+            <ng-container *ngIf="product.rating !== 'null' && product.rating; then thenBlock else elseBlock"></ng-container>
+            <ng-template #thenBlock>Rating : {{product.rating}} <i class="fa-star fa-solid" style="color:orange;"></i></ng-template>
+            <ng-template #elseBlock>Rating : Nothing</ng-template>
+          </p>
+          <a href="{{URL_FRONT}}/product/{{product._id}}"><button type="button" class="btn btn-primary">Details</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

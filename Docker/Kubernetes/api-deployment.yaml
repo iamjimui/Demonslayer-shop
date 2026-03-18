@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.service.type: LoadBalancer
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: api
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: api
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.service.type: LoadBalancer
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: api
+    spec:
+      containers:
+        - args:
+            - nodemon
+            - -L
+            - server.js
+          env:
+            - name: SECRET_KEY
+              value: 667877b49c1712be993161c057be1deea8444de1aba2ef13da9e27d2487574d2ad59c82d5fbf8a39df46ea939698fba42c84f22814819c3ff2091ab4e424e770
+            - name: URL_API
+              value: http://localhost:3000
+            - name: URL_FRONT
+              value: http://localhost:4200
+            - name: URL_MONGO
+              value: mongodb://root:password@mongo
+          image: jimwinnie/umaishop-api:latest
+          name: umaishopapi
+          ports:
+            - containerPort: 3000
+          resources: {}
+      restartPolicy: Always
+status: {}

@@ -1,0 +1,38 @@
+.parent-card {
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap: wrap;
+}
+
+.for-card {
+  margin-left:5%;
+  margin-right:5%;
+  width:15vw;
+}
+
+.child-card {
+  flex: 1 0 21%;
+  width:100%;
+  height:100%;
+}
+
+.card-title {
+  font-size: 1.2vw;
+}
+
+.card-text {
+  font-size: 1.1vw;
+}
+
+.card-body > a {
+  width:100%;
+}
+
+.card-body > a > button {
+  font-size:1.2vw;
+}
+
+.child-card {
+  flex: 1 0 21%;
+}

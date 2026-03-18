@@ -1,0 +1,51 @@
+<ng-container *ngIf="cartService.products.length !== 0 && cartService.products !== null; then thenBlock else elseBlock"></ng-container>
+<ng-template #thenBlock>
+  <div style="margin-top:3%;margin-left:10%;margin-right:10%">
+    <form (ngSubmit)="cartService.submitForm($event)" action="">
+      <div class="row">
+        <div class="col-lg-9">
+          <div *ngFor = "let product of cartService.products; let rowIndex = index">
+            <input type="hidden" name="_id" value="{{product._id}}">
+            <input type="hidden" name="userId" value="{{product.userId}}">
+            <input type="hidden" name="productTypeId" value="{{product.productTypeId}}">
+            <input type="hidden" name="name" value="{{product.name}}">
+            <input type="hidden" name="description" value="{{product.description}}">
+            <input type="hidden" name="price" value="{{product.price}}">
+            <input type="hidden" name="productPrice" value="{{product.productPrice}}">
+            <input type="hidden" name="image" value="{{product.image}}">
+            <input type="hidden" name="productSize" value="{{product.productSize | json}}">
+            <div class="row">
+              <div class="col" style="display:flex;justify-content:center;align-items:center;">
+                <img src="{{product.image}}" style="width:200px;height:200px;border-radius:50%;object-fit: cover;">
+              </div>
+              <div class="col">
+                <p>Name : {{product.name}}</p>
+                <p>Size : {{product.productSize.name}}</p>
+                <p>Price : {{product.price}} €</p>
+                <input type="text" name="quantity" value="{{product.quantity}}" min="0" readonly>
+                <button type="button" (click)="cartService.incrementItem(rowIndex)" class="btn btn-primary">+</button>
+                <button type="button" (click)="cartService.decrementItem(rowIndex)" class="btn btn-primary">-</button>
+                <button type="button" (click)="cartService.removeItem(rowIndex)" class="btn btn-danger">Delete</button>
+                <input type="hidden" value="{{rowIndex+1}}">
+              </div>
+            </div>
+            
+            <hr>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div id="showTotalPrice"><span>Total price : {{cartService.totalprice}} €</span></div>
+          <input type="hidden" name="totalPrice" value="{{cartService.totalprice}}">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+</ng-template>
+<ng-template #elseBlock>
+  <div style="width:100%;height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;">
+    <img src="../../assets/images/logos/tanjiroangryface.png">
+    <p>There's nothing here :(</p>
+  </div>
+</ng-template>
